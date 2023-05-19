@@ -64,5 +64,5 @@ Date ParseDate(std::istream& stream){
             }
         }
     }else
-        throw std::runtime_error("Wrong date format: ");
+        throw std::runtime_error("Wrong date format");
 }

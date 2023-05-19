@@ -5,7 +5,16 @@
 #include <set>
 #include <fstream>
 
-
+/*
+ * 1. Хранит данные (и сами данные и структуру
+ * 2. Занимается взаимодействие с пользователем
+ * 2.1 Приветсвие
+ * 2.2. Логин
+ * 2.3. Пригглашение ко входу
+ * 2.4. Операции
+ * 2.5. ....
+ * 3. Вызовы команд
+ */
 int main() {
     TestAll();
     system("chcp 65001");
@@ -29,14 +38,13 @@ int main() {
             "Введите CHANGE для смены аккаунта;\n"
             "==============================================================================\n";
 
-
     for (string line; getline(cin, line);) {
 
         istringstream is(line);
 
         string command;
         is >> command;
-        if (command == "HELP") {
+        if (command == "HELP" || command == "help" || command == "Help") {
             cout << "Add date event — добавить в базу данных пару (date, event);\n"
                     "\n"
                     "Print — вывести всё содержимое базы данных;\n"
@@ -84,7 +92,7 @@ int main() {
             };
 
             const auto entries = ACCOUNTS[{login, password}].FindIf(predicate);
-            for (const auto &entry : entries) {
+            for (const auto &entry: entries) {
                 cout << entry << endl;
             }
             cout << "Found " << entries.size() << " entries" << endl;
@@ -97,8 +105,9 @@ int main() {
         } else if (command.empty()) {
             continue;
         } else {
-            throw logic_error("Unknown command: " + command);
+            cout << "Unknown command: " + command + '\n';
         }
     }
+
     return 0;
 }

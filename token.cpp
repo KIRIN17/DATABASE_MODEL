@@ -8,7 +8,7 @@ vector<Token> Tokenize(istream& cl) {
     vector<Token> tokens;
     char c;
     while (cl >> c) {
-        if (isdigit(c) || c == '-') {
+        if (isdigit(c) || (c == '-' && isdigit(cl.peek()))) {
             string date(1, c);
             for (int i = 0; i < 3; ++i) {
                 while (isdigit(cl.peek())) {

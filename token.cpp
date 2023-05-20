@@ -6,10 +6,9 @@ using namespace std;
 
 vector<Token> Tokenize(istream& cl) {
     vector<Token> tokens;
-
     char c;
     while (cl >> c) {
-        if (isdigit(c)) {
+        if (isdigit(c) || c == '-') {
             string date(1, c);
             for (int i = 0; i < 3; ++i) {
                 while (isdigit(cl.peek())) {

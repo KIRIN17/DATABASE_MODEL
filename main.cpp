@@ -67,18 +67,18 @@ int main() {
                         "Del date < 2017-01-01 AND (event == \"holiday\" OR event == \"sport event\") — удалить из базы все события «holiday» и «sport event», случившиеся до 2017 года.\n"
                         "\n"
                         "В командах обоих типов условия могут быть пустыми: под такое условие попадают все события.\n";
-            } else if (command == "CHANGE") {
+            } else if (command == "CHANGE" || command == "change" || command == "Change") {
                 cout << "Введите логин : ";
                 cin >> login;
                 cout << "Введите пароль : ";
                 cin >> password;
-            } else if (command == "Add") {
+            } else if (command == "Add" || command == "add") {
                 const auto date = ParseDate(is);
                 const auto event = ParseEvent(is);
                 ACCOUNTS[{login, password}].Add(date, event);
-            } else if (command == "Print") {
+            } else if (command == "Print" || command == "print") {
                 ACCOUNTS[{login, password}].Print(cout);
-            } else if (command == "Del") {
+            } else if (command == "Del" || command == "del") {
 
                 auto condition = ParseCondition(is);
                 auto predicate = [condition](const Date &date, const string &event) {
@@ -87,7 +87,7 @@ int main() {
 
                 int count = ACCOUNTS[{login, password}].RemoveIf(predicate);
                 cout << "Removed " << count << " entries" << endl;
-            } else if (command == "Find") {
+            } else if (command == "Find" || command == "find") {
                 auto condition = ParseCondition(is);
                 auto predicate = [condition](const Date &date, const string &event) {
                     return condition->Evaluate(date, event);
@@ -98,7 +98,7 @@ int main() {
                     cout << entry << endl;
                 }
                 cout << "Found " << entries.size() << " entries" << endl;
-            } else if (command == "Last") {
+            } else if (command == "Last" || command == "last") {
                 try {
                     cout << ACCOUNTS[{login, password}].Last(ParseDate(is)) << endl;
                 } catch (invalid_argument &) {
